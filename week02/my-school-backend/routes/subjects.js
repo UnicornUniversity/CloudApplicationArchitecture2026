@@ -5,8 +5,9 @@ const router = express.Router();
 
 router.get("/list", async (req
     , res, next) => {
-    const classesData = await dml.readClasses();
-    res.json(classesData);
+    // TODO uncomment to see an easter egg
+    //res.status(418);
+    res.json(await dml.readSubjects());
 });
 
 module.exports = router;

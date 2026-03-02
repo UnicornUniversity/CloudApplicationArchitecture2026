@@ -17,8 +17,33 @@ async function readDataRoutines(entityName) {
     return JSON.parse(rawFileContent);
 }
 
+async function saveDataRoutines(entityName, items) {
+    return await fs.writeFile(path.join(dataPath, entityName), JSON.stringify(items));
+}
+
 async function readClasses() {
     return await readDataRoutines(CLASSES);
 }
 
+async function readStudents() {
+    return await readDataRoutines(PERSONS);
+}
+
+async function readSubjects() {
+    return await readDataRoutines(SUBJECT);
+}
+
+async function readGrades() {
+    return await readDataRoutines(GRADES);
+}
+
+async function saveGrades(items) {
+    return await saveDataRoutines(GRADES, items);
+}
+
+
 module.exports.readClasses = readClasses;
+module.exports.readStudents = readStudents;
+module.exports.readSubjects = readSubjects;
+module.exports.readGrades = readGrades;
+module.exports.saveGrades = saveGrades;
