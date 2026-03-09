@@ -1,0 +1,991 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.1 (Python 3.13.6 on win32)" generated="2026-03-09T09:09:22.554241" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="C:\Leonov\CloudApplicationArchitecture2026\week02\my-school-backend\tests">
+<suite id="s1-s1" name="Api Tests" source="C:\Leonov\CloudApplicationArchitecture2026\week02\my-school-backend\tests\api_tests.robot">
+<test id="s1-s1-t1" name="Test Get Student By ID 22" line="12">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-03-09T09:09:22.966490" level="INFO">Creating Session using : alias=api_session, url=http://localhost:3001, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api_session</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-03-09T09:09:22.966262" elapsed="0.000420"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-09T09:09:22.967510" level="INFO">${params} = {'userName': 'testuser'}</msg>
+<var>${params}</var>
+<arg>userName=${USERNAME}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-09T09:09:22.966981" elapsed="0.000564"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2026-03-09T09:09:23.056226" level="INFO">GET Request : url=http://localhost:3001/students/get/22?userName=testuser 
+ path_url=/students/get/22?userName=testuser 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-03-09T09:09:23.056505" level="INFO">GET Response : url=http://localhost:3001/students/get/22?userName=testuser 
+ status=200, reason=OK 
+ headers={'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '81', 'ETag': 'W/"51-eBTf8Lfu7w8ypWoExXS7Hl6fcK4"', 'Date': 'Mon, 09 Mar 2026 08:09:23 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"id":22,"name":"Oscar Baker","dob":"2006-06-14","class":1,"dobStr":"14/06/2006"} 
+ </msg>
+<msg time="2026-03-09T09:09:23.056872" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>api_session</arg>
+<arg>/students/get/22</arg>
+<arg>params=${params}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-03-09T09:09:22.967804" elapsed="0.089124"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.059460" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.057892" elapsed="0.001717"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.063051" level="INFO">${json_body} = {'id': 22, 'name': 'Oscar Baker', 'dob': '2006-06-14', 'class': 1, 'dobStr': '14/06/2006'}</msg>
+<var>${json_body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.061720" elapsed="0.001398"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.065164" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${json_body['id']}</arg>
+<arg>22</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.064184" elapsed="0.001099"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${json_body['name']}</arg>
+<arg>Oscar Baker</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.065720" elapsed="0.000995"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${json_body['dob']}</arg>
+<arg>2006-06-14</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.067171" elapsed="0.001050"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.069676" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${json_body['class']}</arg>
+<arg>1</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.068684" elapsed="0.001122"/>
+</kw>
+<doc>Test retrieving student with ID 22 (Oscar Baker)</doc>
+<tag>get</tag>
+<tag>students</tag>
+<status status="PASS" start="2026-03-09T09:09:22.965120" elapsed="0.105238"/>
+</test>
+<test id="s1-s1-t2" name="Test Get Performance Report" line="31">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-03-09T09:09:23.072140" level="INFO">Creating Session using : alias=api_session, url=http://localhost:3001, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api_session</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-03-09T09:09:23.071810" elapsed="0.000637"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.073666" level="INFO">${params} = {'userName': 'testuser'}</msg>
+<var>${params}</var>
+<arg>userName=${USERNAME}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.072925" elapsed="0.000829"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2026-03-09T09:09:23.084424" level="INFO">GET Request : url=http://localhost:3001/reports/performance?userName=testuser 
+ path_url=/reports/performance?userName=testuser 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-03-09T09:09:23.084566" level="INFO">GET Response : url=http://localhost:3001/reports/performance?userName=testuser 
+ status=404, reason=Not Found 
+ headers={'X-Powered-By': 'Express', 'Content-Security-Policy': "default-src 'none'", 'X-Content-Type-Options': 'nosniff', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '158', 'Date': 'Mon, 09 Mar 2026 08:09:23 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;title&gt;Error&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;pre&gt;Cannot GET /reports/performance&lt;/pre&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2026-03-09T09:09:23.084834" level="FAIL">HTTPError: 404 Client Error: Not Found for url: http://localhost:3001/reports/performance?userName=testuser</msg>
+<var>${response}</var>
+<arg>api_session</arg>
+<arg>/reports/performance</arg>
+<arg>params=${params}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2026-03-09T09:09:23.074384" elapsed="0.014600">HTTPError: 404 Client Error: Not Found for url: http://localhost:3001/reports/performance?userName=testuser</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.089514" elapsed="0.000057"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${json_body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.089931" elapsed="0.000038"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>isinstance(${json_body}, list)</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.090267" elapsed="0.000035"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<var>${length}</var>
+<arg>${json_body}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.091002" elapsed="0.000078"/>
+</kw>
+<kw name="Should Be Greater Than">
+<arg>${length}</arg>
+<arg>0</arg>
+<status status="NOT RUN" start="2026-03-09T09:09:23.091606" elapsed="0.000058"/>
+</kw>
+<kw name="Get From List" owner="Collections">
+<var>${first_entry}</var>
+<arg>${json_body}</arg>
+<arg>0</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.092026" elapsed="0.000038"/>
+</kw>
+<kw name="Should Have Key">
+<arg>${first_entry}</arg>
+<arg>idStudent</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.092680" elapsed="0.000064"/>
+</kw>
+<kw name="Should Have Key">
+<arg>${first_entry}</arg>
+<arg>nameStudent</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.093175" elapsed="0.000045"/>
+</kw>
+<kw name="Should Have Key">
+<arg>${first_entry}</arg>
+<arg>dob</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.093894" elapsed="0.000046"/>
+</kw>
+<kw name="Should Have Key">
+<arg>${first_entry}</arg>
+<arg>idClass</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.094284" elapsed="0.000030"/>
+</kw>
+<kw name="Should Have Key">
+<arg>${first_entry}</arg>
+<arg>nameClass</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.094524" elapsed="0.000022"/>
+</kw>
+<kw name="Should Have Key">
+<arg>${first_entry}</arg>
+<arg>subjectStats</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.094716" elapsed="0.000028"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${subjectStats}</var>
+<arg>${first_entry}</arg>
+<arg>subjectStats</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.094932" elapsed="0.000021"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>isinstance(${subjectStats}, list)</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.095104" elapsed="0.000021"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<var>${stats_length}</var>
+<arg>${subjectStats}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.095334" elapsed="0.000023"/>
+</kw>
+<kw name="Should Be Greater Than">
+<arg>${stats_length}</arg>
+<arg>0</arg>
+<status status="NOT RUN" start="2026-03-09T09:09:23.095555" elapsed="0.000023"/>
+</kw>
+<kw name="Get From List" owner="Collections">
+<var>${first_subject}</var>
+<arg>${subjectStats}</arg>
+<arg>0</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.095732" elapsed="0.000019"/>
+</kw>
+<kw name="Should Have Key">
+<arg>${first_subject}</arg>
+<arg>idSubject</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.095987" elapsed="0.000027"/>
+</kw>
+<kw name="Should Have Key">
+<arg>${first_subject}</arg>
+<arg>nameSubject</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.096194" elapsed="0.000020"/>
+</kw>
+<kw name="Should Have Key">
+<arg>${first_subject}</arg>
+<arg>value</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.096368" elapsed="0.000019"/>
+</kw>
+<doc>Test retrieving the performance report for all students</doc>
+<tag>performance</tag>
+<tag>reports</tag>
+<status status="FAIL" start="2026-03-09T09:09:23.070952" elapsed="0.025709">HTTPError: 404 Client Error: Not Found for url: http://localhost:3001/reports/performance?userName=testuser</status>
+</test>
+<test id="s1-s1-t3" name="Test Get Performance Report Contains Student 22" line="71">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-03-09T09:09:23.098041" level="INFO">Creating Session using : alias=api_session, url=http://localhost:3001, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api_session</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-03-09T09:09:23.097771" elapsed="0.000494"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.099243" level="INFO">${params} = {'userName': 'testuser'}</msg>
+<var>${params}</var>
+<arg>userName=${USERNAME}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.098656" elapsed="0.000635"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2026-03-09T09:09:23.105983" level="INFO">GET Request : url=http://localhost:3001/reports/performance?userName=testuser 
+ path_url=/reports/performance?userName=testuser 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-03-09T09:09:23.106122" level="INFO">GET Response : url=http://localhost:3001/reports/performance?userName=testuser 
+ status=404, reason=Not Found 
+ headers={'X-Powered-By': 'Express', 'Content-Security-Policy': "default-src 'none'", 'X-Content-Type-Options': 'nosniff', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '158', 'Date': 'Mon, 09 Mar 2026 08:09:23 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;title&gt;Error&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;pre&gt;Cannot GET /reports/performance&lt;/pre&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2026-03-09T09:09:23.106308" level="FAIL">HTTPError: 404 Client Error: Not Found for url: http://localhost:3001/reports/performance?userName=testuser</msg>
+<var>${response}</var>
+<arg>api_session</arg>
+<arg>/reports/performance</arg>
+<arg>params=${params}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2026-03-09T09:09:23.099670" elapsed="0.008554">HTTPError: 404 Client Error: Not Found for url: http://localhost:3001/reports/performance?userName=testuser</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.108691" elapsed="0.000044"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${json_body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.108958" elapsed="0.000022"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${student_found}</var>
+<arg>False</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.109168" elapsed="0.000023"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${id}</var>
+<arg>${entry}</arg>
+<arg>idStudent</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.109606" elapsed="0.000023"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${name}</var>
+<arg>${entry}</arg>
+<arg>nameStudent</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.109722" elapsed="0.000018"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${id} == 22</arg>
+<arg>Log</arg>
+<arg>Found student ${name} with ID ${id}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.111134" elapsed="0.000062"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${id} == 22</arg>
+<arg>Set Test Variable</arg>
+<arg>${student_found}</arg>
+<arg>True</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.111326" elapsed="0.000019"/>
+</kw>
+<var name="${entry}"/>
+<status status="NOT RUN" start="2026-03-09T09:09:23.109497" elapsed="0.001888"/>
+</iter>
+<var>${entry}</var>
+<value>@{json_body}</value>
+<status status="NOT RUN" start="2026-03-09T09:09:23.109342" elapsed="0.002097"/>
+</for>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${student_found}</arg>
+<arg>Student 22 not found in performance report</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.111776" elapsed="0.000024"/>
+</kw>
+<doc>Test that performance report contains Ava Baker (student 22)</doc>
+<tag>integration</tag>
+<tag>performance</tag>
+<tag>reports</tag>
+<status status="FAIL" start="2026-03-09T09:09:23.097090" elapsed="0.015000">HTTPError: 404 Client Error: Not Found for url: http://localhost:3001/reports/performance?userName=testuser</status>
+</test>
+<test id="s1-s1-t4" name="Test Add Grade Successfully" line="96">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-03-09T09:09:23.113293" level="INFO">Creating Session using : alias=api_session, url=http://localhost:3001, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api_session</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-03-09T09:09:23.113011" elapsed="0.000500"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.114477" level="INFO">${grade_data} = {'idStudent': '22', 'idSubject': '1', 'date': '2024-03-05', 'mark': '5'}</msg>
+<var>${grade_data}</var>
+<arg>idStudent=22</arg>
+<arg>idSubject=1</arg>
+<arg>date=2024-03-05</arg>
+<arg>mark=5</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.113914" elapsed="0.000617"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.115507" level="INFO">${params} = {'userName': 'testuser'}</msg>
+<var>${params}</var>
+<arg>userName=${USERNAME}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.114948" elapsed="0.000606"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-03-09T09:09:23.154175" level="INFO">POST Request : url=http://localhost:3001/grades/add?userName=testuser 
+ path_url=/grades/add?userName=testuser 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '72', 'Content-Type': 'application/json'} 
+ body=b'{"idStudent": "22", "idSubject": "1", "date": "2024-03-05", "mark": "5"}' 
+ </msg>
+<msg time="2026-03-09T09:09:23.154308" level="INFO">POST Response : url=http://localhost:3001/grades/add?userName=testuser 
+ status=201, reason=Created 
+ headers={'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '79', 'ETag': 'W/"4f-UGH9zWlLHyW2BmbdNiv+ElmFFAc"', 'Date': 'Mon, 09 Mar 2026 08:09:23 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"idStudent":"22","idSubject":"1","date":"2024-03-05","mark":"5","errorStr":""} 
+ </msg>
+<msg time="2026-03-09T09:09:23.154502" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>api_session</arg>
+<arg>/grades/add</arg>
+<arg>json=${grade_data}</arg>
+<arg>params=${params}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.116325" elapsed="0.038207"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.201447" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2026-03-09T09:09:23.201650" level="FAIL">201 != 200</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="FAIL" start="2026-03-09T09:09:23.199258" elapsed="0.002509">201 != 200</status>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${json_body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.202396" elapsed="0.000054"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${json_body['idStudent']}</arg>
+<arg>22</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.202838" elapsed="0.000043"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${json_body['idSubject']}</arg>
+<arg>1</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.203185" elapsed="0.000036"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${json_body['date']}</arg>
+<arg>2024-03-05</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.203495" elapsed="0.000029"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${json_body['mark']}</arg>
+<arg>5</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.203944" elapsed="0.000043"/>
+</kw>
+<doc>Test adding a new grade for a student</doc>
+<tag>add</tag>
+<tag>grades</tag>
+<tag>post</tag>
+<status status="FAIL" start="2026-03-09T09:09:23.112459" elapsed="0.091879">201 != 200</status>
+</test>
+<test id="s1-s1-t5" name="Test Add Grade With Different Values" line="126">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-03-09T09:09:23.206152" level="INFO">Creating Session using : alias=api_session, url=http://localhost:3001, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api_session</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-03-09T09:09:23.205919" elapsed="0.000396"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.207054" level="INFO">${grade_data} = {'idStudent': '1', 'idSubject': '2', 'date': '2024-03-06', 'mark': '3'}</msg>
+<var>${grade_data}</var>
+<arg>idStudent=1</arg>
+<arg>idSubject=2</arg>
+<arg>date=2024-03-06</arg>
+<arg>mark=3</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.206615" elapsed="0.000478"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.207897" level="INFO">${params} = {'userName': 'testuser'}</msg>
+<var>${params}</var>
+<arg>userName=${USERNAME}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.207473" elapsed="0.000456"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-03-09T09:09:23.219848" level="INFO">POST Request : url=http://localhost:3001/grades/add?userName=testuser 
+ path_url=/grades/add?userName=testuser 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '71', 'Content-Type': 'application/json'} 
+ body=b'{"idStudent": "1", "idSubject": "2", "date": "2024-03-06", "mark": "3"}' 
+ </msg>
+<msg time="2026-03-09T09:09:23.220209" level="INFO">POST Response : url=http://localhost:3001/grades/add?userName=testuser 
+ status=201, reason=Created 
+ headers={'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '78', 'ETag': 'W/"4e-wCSVG4IyQ4a0LcjV405ov3wZhbM"', 'Date': 'Mon, 09 Mar 2026 08:09:23 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"idStudent":"1","idSubject":"2","date":"2024-03-06","mark":"3","errorStr":""} 
+ </msg>
+<msg time="2026-03-09T09:09:23.220447" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>api_session</arg>
+<arg>/grades/add</arg>
+<arg>json=${grade_data}</arg>
+<arg>params=${params}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.208456" elapsed="0.012027"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.241586" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2026-03-09T09:09:23.241793" level="FAIL">201 != 200</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="FAIL" start="2026-03-09T09:09:23.240640" elapsed="0.001276">201 != 200</status>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${json_body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.242611" elapsed="0.000074"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${json_body['idStudent']}</arg>
+<arg>1</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.243347" elapsed="0.000063"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${json_body['idSubject']}</arg>
+<arg>2</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.243926" elapsed="0.000050"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${json_body['date']}</arg>
+<arg>2024-03-06</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.244260" elapsed="0.000025"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${json_body['mark']}</arg>
+<arg>3</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.244998" elapsed="0.000068"/>
+</kw>
+<doc>Test adding another grade with different values</doc>
+<tag>add</tag>
+<tag>grades</tag>
+<tag>post</tag>
+<status status="FAIL" start="2026-03-09T09:09:23.205125" elapsed="0.040682">201 != 200</status>
+</test>
+<test id="s1-s1-t6" name="Test Add Grade Minimum Mark" line="154">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-03-09T09:09:23.247597" level="INFO">Creating Session using : alias=api_session, url=http://localhost:3001, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api_session</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-03-09T09:09:23.247355" elapsed="0.000417"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.248578" level="INFO">${grade_data} = {'idStudent': '5', 'idSubject': '3', 'date': '2024-03-07', 'mark': '1'}</msg>
+<var>${grade_data}</var>
+<arg>idStudent=5</arg>
+<arg>idSubject=3</arg>
+<arg>date=2024-03-07</arg>
+<arg>mark=1</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.248092" elapsed="0.000518"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.249319" level="INFO">${params} = {'userName': 'testuser'}</msg>
+<var>${params}</var>
+<arg>userName=${USERNAME}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.248919" elapsed="0.000430"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-03-09T09:09:23.258206" level="INFO">POST Request : url=http://localhost:3001/grades/add?userName=testuser 
+ path_url=/grades/add?userName=testuser 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '71', 'Content-Type': 'application/json'} 
+ body=b'{"idStudent": "5", "idSubject": "3", "date": "2024-03-07", "mark": "1"}' 
+ </msg>
+<msg time="2026-03-09T09:09:23.258364" level="INFO">POST Response : url=http://localhost:3001/grades/add?userName=testuser 
+ status=201, reason=Created 
+ headers={'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '78', 'ETag': 'W/"4e-DpKwMRZI5mrxMtKzj4mbyWvDvcw"', 'Date': 'Mon, 09 Mar 2026 08:09:23 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"idStudent":"5","idSubject":"3","date":"2024-03-07","mark":"1","errorStr":""} 
+ </msg>
+<msg time="2026-03-09T09:09:23.258550" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>api_session</arg>
+<arg>/grades/add</arg>
+<arg>json=${grade_data}</arg>
+<arg>params=${params}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.249631" elapsed="0.008956"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.260300" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2026-03-09T09:09:23.260517" level="FAIL">201 != 200</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="FAIL" start="2026-03-09T09:09:23.259164" elapsed="0.001460">201 != 200</status>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${json_body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.261095" elapsed="0.000047"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${json_body['mark']}</arg>
+<arg>1</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.261473" elapsed="0.000034"/>
+</kw>
+<doc>Test adding a grade with minimum mark value (1)</doc>
+<tag>add</tag>
+<tag>grades</tag>
+<tag>post</tag>
+<status status="FAIL" start="2026-03-09T09:09:23.246788" elapsed="0.015072">201 != 200</status>
+</test>
+<test id="s1-s1-t7" name="Test Add Grade Maximum Mark" line="178">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-03-09T09:09:23.263657" level="INFO">Creating Session using : alias=api_session, url=http://localhost:3001, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api_session</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-03-09T09:09:23.263332" elapsed="0.000607"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.265888" level="INFO">${grade_data} = {'idStudent': '10', 'idSubject': '2', 'date': '2024-03-08', 'mark': '5'}</msg>
+<var>${grade_data}</var>
+<arg>idStudent=10</arg>
+<arg>idSubject=2</arg>
+<arg>date=2024-03-08</arg>
+<arg>mark=5</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.265122" elapsed="0.000828"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.267048" level="INFO">${params} = {'userName': 'testuser'}</msg>
+<var>${params}</var>
+<arg>userName=${USERNAME}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.266416" elapsed="0.000679"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-03-09T09:09:23.276594" level="INFO">POST Request : url=http://localhost:3001/grades/add?userName=testuser 
+ path_url=/grades/add?userName=testuser 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '72', 'Content-Type': 'application/json'} 
+ body=b'{"idStudent": "10", "idSubject": "2", "date": "2024-03-08", "mark": "5"}' 
+ </msg>
+<msg time="2026-03-09T09:09:23.276706" level="INFO">POST Response : url=http://localhost:3001/grades/add?userName=testuser 
+ status=201, reason=Created 
+ headers={'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '79', 'ETag': 'W/"4f-U3+p+dkow2QCSegopnw0frYTzQY"', 'Date': 'Mon, 09 Mar 2026 08:09:23 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"idStudent":"10","idSubject":"2","date":"2024-03-08","mark":"5","errorStr":""} 
+ </msg>
+<msg time="2026-03-09T09:09:23.276892" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>api_session</arg>
+<arg>/grades/add</arg>
+<arg>json=${grade_data}</arg>
+<arg>params=${params}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.267714" elapsed="0.009206"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.278217" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2026-03-09T09:09:23.278351" level="FAIL">201 != 200</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="FAIL" start="2026-03-09T09:09:23.277365" elapsed="0.001060">201 != 200</status>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${json_body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.279143" elapsed="0.000050"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${json_body['mark']}</arg>
+<arg>5</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.279597" elapsed="0.000052"/>
+</kw>
+<doc>Test adding a grade with maximum mark value (5)</doc>
+<tag>add</tag>
+<tag>grades</tag>
+<tag>post</tag>
+<status status="FAIL" start="2026-03-09T09:09:23.262562" elapsed="0.017758">201 != 200</status>
+</test>
+<test id="s1-s1-t8" name="Test Get Student 22 Has Valid Structure" line="202">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-03-09T09:09:23.282464" level="INFO">Creating Session using : alias=api_session, url=http://localhost:3001, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api_session</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-03-09T09:09:23.282103" elapsed="0.000632"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.283950" level="INFO">${params} = {'userName': 'testuser'}</msg>
+<var>${params}</var>
+<arg>userName=${USERNAME}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.283222" elapsed="0.000794"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2026-03-09T09:09:23.292901" level="INFO">GET Request : url=http://localhost:3001/students/get/22?userName=testuser 
+ path_url=/students/get/22?userName=testuser 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-03-09T09:09:23.293264" level="INFO">GET Response : url=http://localhost:3001/students/get/22?userName=testuser 
+ status=200, reason=OK 
+ headers={'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '81', 'ETag': 'W/"51-eBTf8Lfu7w8ypWoExXS7Hl6fcK4"', 'Date': 'Mon, 09 Mar 2026 08:09:23 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"id":22,"name":"Oscar Baker","dob":"2006-06-14","class":1,"dobStr":"14/06/2006"} 
+ </msg>
+<msg time="2026-03-09T09:09:23.294157" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>api_session</arg>
+<arg>/students/get/22</arg>
+<arg>params=${params}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.284665" elapsed="0.009552"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.295607" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.294644" elapsed="0.001069"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.297402" level="INFO">${json_body} = {'id': 22, 'name': 'Oscar Baker', 'dob': '2006-06-14', 'class': 1, 'dobStr': '14/06/2006'}</msg>
+<var>${json_body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.296206" elapsed="0.001269"/>
+</kw>
+<kw name="Should Have Key">
+<kw name="Should Be True" owner="BuiltIn">
+<arg>'${key}' in ${dictionary}</arg>
+<arg>Dictionary does not have key '${key}'</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.298853" elapsed="0.001283"/>
+</kw>
+<arg>${json_body}</arg>
+<arg>id</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="PASS" start="2026-03-09T09:09:23.298060" elapsed="0.002273"/>
+</kw>
+<kw name="Should Have Key">
+<kw name="Should Be True" owner="BuiltIn">
+<arg>'${key}' in ${dictionary}</arg>
+<arg>Dictionary does not have key '${key}'</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.301990" elapsed="0.001173"/>
+</kw>
+<arg>${json_body}</arg>
+<arg>name</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="PASS" start="2026-03-09T09:09:23.301111" elapsed="0.002233"/>
+</kw>
+<kw name="Should Have Key">
+<kw name="Should Be True" owner="BuiltIn">
+<arg>'${key}' in ${dictionary}</arg>
+<arg>Dictionary does not have key '${key}'</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.304415" elapsed="0.000945"/>
+</kw>
+<arg>${json_body}</arg>
+<arg>dob</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="PASS" start="2026-03-09T09:09:23.303875" elapsed="0.001674"/>
+</kw>
+<kw name="Should Have Key">
+<kw name="Should Be True" owner="BuiltIn">
+<arg>'${key}' in ${dictionary}</arg>
+<arg>Dictionary does not have key '${key}'</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.306513" elapsed="0.000764"/>
+</kw>
+<arg>${json_body}</arg>
+<arg>class</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="PASS" start="2026-03-09T09:09:23.306051" elapsed="0.001383"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>isinstance(${json_body['id']}, int)</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.308058" elapsed="0.000832"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.310516" level="FAIL">Evaluating expression 'isinstance(Oscar Baker, str)' failed: SyntaxError: invalid syntax. Perhaps you forgot a comma? (&lt;string&gt;, line 1)</msg>
+<arg>isinstance(${json_body['name']}, str)</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="FAIL" start="2026-03-09T09:09:23.309308" elapsed="0.001444">Evaluating expression 'isinstance(Oscar Baker, str)' failed: SyntaxError: invalid syntax. Perhaps you forgot a comma? (&lt;string&gt;, line 1)</status>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>isinstance(${json_body['dob']}, str)</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.311209" elapsed="0.000038"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>isinstance(${json_body['class']}, int)</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.311662" elapsed="0.000052"/>
+</kw>
+<doc>Test that student 22 response has all expected fields</doc>
+<tag>get</tag>
+<tag>structure</tag>
+<tag>students</tag>
+<status status="FAIL" start="2026-03-09T09:09:23.281281" elapsed="0.030868">Evaluating expression 'isinstance(Oscar Baker, str)' failed: SyntaxError: invalid syntax. Perhaps you forgot a comma? (&lt;string&gt;, line 1)</status>
+</test>
+<test id="s1-s1-t9" name="Test Performance Report Has Correct Data Structure" line="228">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-03-09T09:09:23.313897" level="INFO">Creating Session using : alias=api_session, url=http://localhost:3001, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>api_session</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-03-09T09:09:23.313594" elapsed="0.000593"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-03-09T09:09:23.315628" level="INFO">${params} = {'userName': 'testuser'}</msg>
+<var>${params}</var>
+<arg>userName=${USERNAME}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-03-09T09:09:23.314878" elapsed="0.000830"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2026-03-09T09:09:23.322678" level="INFO">GET Request : url=http://localhost:3001/reports/performance?userName=testuser 
+ path_url=/reports/performance?userName=testuser 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-03-09T09:09:23.322865" level="INFO">GET Response : url=http://localhost:3001/reports/performance?userName=testuser 
+ status=404, reason=Not Found 
+ headers={'X-Powered-By': 'Express', 'Content-Security-Policy': "default-src 'none'", 'X-Content-Type-Options': 'nosniff', 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': '158', 'Date': 'Mon, 09 Mar 2026 08:09:23 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body=&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;title&gt;Error&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;pre&gt;Cannot GET /reports/performance&lt;/pre&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+ 
+ </msg>
+<msg time="2026-03-09T09:09:23.323117" level="FAIL">HTTPError: 404 Client Error: Not Found for url: http://localhost:3001/reports/performance?userName=testuser</msg>
+<var>${response}</var>
+<arg>api_session</arg>
+<arg>/reports/performance</arg>
+<arg>params=${params}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2026-03-09T09:09:23.316303" elapsed="0.008324">HTTPError: 404 Client Error: Not Found for url: http://localhost:3001/reports/performance?userName=testuser</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.329638" elapsed="0.000124"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${json_body}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.334349" elapsed="0.001293"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Should Have Key">
+<arg>${entry}</arg>
+<arg>idStudent</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.336716" elapsed="0.000060"/>
+</kw>
+<kw name="Should Have Key">
+<arg>${entry}</arg>
+<arg>nameStudent</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.337057" elapsed="0.000051"/>
+</kw>
+<kw name="Should Have Key">
+<arg>${entry}</arg>
+<arg>dob</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.337349" elapsed="0.000043"/>
+</kw>
+<kw name="Should Have Key">
+<arg>${entry}</arg>
+<arg>idClass</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.337569" elapsed="0.000108"/>
+</kw>
+<kw name="Should Have Key">
+<arg>${entry}</arg>
+<arg>nameClass</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.337912" elapsed="0.000048"/>
+</kw>
+<kw name="Should Have Key">
+<arg>${entry}</arg>
+<arg>subjectStats</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.338140" elapsed="0.000030"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${stats}</var>
+<arg>${entry}</arg>
+<arg>subjectStats</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.338316" elapsed="0.000029"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Should Have Key">
+<arg>${stat}</arg>
+<arg>idSubject</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.338819" elapsed="0.000043"/>
+</kw>
+<kw name="Should Have Key">
+<arg>${stat}</arg>
+<arg>nameSubject</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.339060" elapsed="0.000029"/>
+</kw>
+<kw name="Should Have Key">
+<arg>${stat}</arg>
+<arg>value</arg>
+<doc>Keyword to check if dictionary has a specific key</doc>
+<status status="NOT RUN" start="2026-03-09T09:09:23.339251" elapsed="0.000022"/>
+</kw>
+<var name="${stat}"/>
+<status status="NOT RUN" start="2026-03-09T09:09:23.338582" elapsed="0.000728"/>
+</iter>
+<var>${stat}</var>
+<value>@{stats}</value>
+<status status="NOT RUN" start="2026-03-09T09:09:23.338464" elapsed="0.000901"/>
+</for>
+<var name="${entry}"/>
+<status status="NOT RUN" start="2026-03-09T09:09:23.336432" elapsed="0.002998"/>
+</iter>
+<var>${entry}</var>
+<value>@{json_body}</value>
+<status status="NOT RUN" start="2026-03-09T09:09:23.336122" elapsed="0.003342"/>
+</for>
+<doc>Test that performance report follows correct schema</doc>
+<tag>performance</tag>
+<tag>reports</tag>
+<tag>schema</tag>
+<status status="FAIL" start="2026-03-09T09:09:23.312885" elapsed="0.038235">HTTPError: 404 Client Error: Not Found for url: http://localhost:3001/reports/performance?userName=testuser</status>
+</test>
+<status status="FAIL" start="2026-03-09T09:09:22.768652" elapsed="0.583644"/>
+</suite>
+<status status="FAIL" start="2026-03-09T09:09:22.558572" elapsed="0.794970"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="8" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="4" skip="0">add</stat>
+<stat pass="1" fail="1" skip="0">get</stat>
+<stat pass="0" fail="4" skip="0">grades</stat>
+<stat pass="0" fail="1" skip="0">integration</stat>
+<stat pass="0" fail="3" skip="0">performance</stat>
+<stat pass="0" fail="4" skip="0">post</stat>
+<stat pass="0" fail="3" skip="0">reports</stat>
+<stat pass="0" fail="1" skip="0">schema</stat>
+<stat pass="0" fail="1" skip="0">structure</stat>
+<stat pass="1" fail="1" skip="0">students</stat>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="1" fail="8" skip="0">Tests</stat>
+<stat name="Api Tests" id="s1-s1" pass="1" fail="8" skip="0">Tests.Api Tests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

@@ -1,6 +1,18 @@
 const express = require("express");
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./swagger');
 
 const app = express();
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// CORS
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    next();
+});
 
 app.use("/health", (req, res, next) => {
     res.send("<h1>Express WS is OK!</h1>");

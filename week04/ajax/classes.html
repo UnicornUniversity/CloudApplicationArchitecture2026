@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Classes List</title>
+    <script src="jquery-4.0.0.min.js"></script>
+</head>
+<body>
+<label for="classesList">Classes:</label>
+<select id="classesList"></select>
+
+<script>
+    $(document).ready(() => {
+        $.ajax({
+                url: "http://localhost:3001/classes/list",
+                method: "GET",
+                dataType: "json"
+            }
+        ).done((classesList) => {
+            console.log(classesList);
+
+            if (classesList.length > 0) {
+                for (let i = 0; i < classesList.length; i++) {
+                    const cl = classesList[i];
+                    $("#classesList").append("<option value='" + cl.id + "'>" + cl.name + "</option>")
+                }
+            }
+
+        }).fail((err) => {
+            console.log(err);
+        })
+    });
+</script>
+</body>
+</html>
