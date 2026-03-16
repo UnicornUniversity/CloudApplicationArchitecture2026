@@ -24,7 +24,7 @@ const router = express.Router();
  *       200:
  *         description: List of students in the class
  */
-router.get("/classes/:id", async (req, res, next) => {
+router.get("/class/:id", async (req, res, next) => {
     const idClass = parseInt(req.params.id);
     const allStudents = await dml.readStudents();
     res.json(studentsHelper.getStudentsForClass(allStudents, idClass));
