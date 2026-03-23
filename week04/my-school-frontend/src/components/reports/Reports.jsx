@@ -22,6 +22,7 @@ export default function Reports() {
         dao.readClasses().then((items) => setClassesData(items));
         dao.readSubjects().then((items) => setSubjectsData(items));
         dao.readPerformance().then((items) =>{
+            // they are async calls!
             setDataGrid(items);
             setDataGridFilter(items);
         });
