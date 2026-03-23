@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Classes from "./components/classes/Classes";
 import {RouterProvider, createBrowserRouter} from "react-router-dom"
-import MainLayout from "./components/MainLayout.";
+import MainLayout from "./components/MainLayout";
 import Home from "./components/Home";
 import Students from "./components/students/Students";
 import Reports from "./components/reports/Reports";
