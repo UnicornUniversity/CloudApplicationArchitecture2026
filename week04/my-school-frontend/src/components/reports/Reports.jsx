@@ -1,6 +1,5 @@
 import {DAO} from "../../data/DAO";
 import {useEffect, useState} from "react";
-import ClassCard from "../classes/ClassCard";
 import StudentsFilter from "../shared/StudentsFilter";
 import AddGrade from "../students/AddGrade";
 import PerformanceGrid from "./PerformanceGrid";
@@ -24,7 +23,7 @@ export default function Reports() {
         dao.readSubjects().then((items) => setSubjectsData(items));
         dao.readPerformance().then((items) =>{
             setDataGrid(items);
-            refreshDataGrid();
+            setDataGridFilter(items);
         });
     }, []);
 
