@@ -47,7 +47,7 @@ const HTTP_STATUS_CANT_CREATE = 400;
 router.post("/add", async (req, res, next) => {
 
     // for debug
-    // console.log(req.body);
+    console.log(req.body);
 
     const output = {
         idStudent: req.body.idStudent,

@@ -8,9 +8,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // CORS
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET,POST");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
 
@@ -41,5 +41,6 @@ app.use("/classes", require("./routes/classes"));
 app.use("/students", require("./routes/students"));
 app.use("/subjects", require("./routes/subjects"));
 app.use("/grades", require("./routes/grades"));
+app.use("/reports", require("./routes/reports"));
 
 app.listen(3001);

@@ -13,16 +13,24 @@ export default function Students() {
     const dao = new DAO();
 
     const [classesData, setClassesData] = useState([]);
+    const [subjectsData, setSubjectsData] = useState([]);
     const [studentsData, setStudentsData] = useState([]);
     const [idClass, setIdClass] = useState(params.idClass === undefined ? idClassDefault : parseInt(params.idClass));
+    const [idSubject, setIdSubject] = useState(1);
+    const [isGradeWindowVisible, setGradeWindowVisible] = useState(false);
 
     useEffect(() => {
         dao.readClasses().then((items) => setClassesData(items));
+        dao.readSubjects().then((items) => setSubjectsData(items));
     }, []);
 
     useEffect(() => {
         dao.readStudents(idClass).then((items) => setStudentsData(items));
     }, [idClass]);
+
+    function openGradeWindow(){
+        setGradeWindowVisible(true);
+    }
 
     return (
         <>
@@ -31,6 +39,8 @@ export default function Students() {
                     classesList={classesData}
                     classesHandler={setIdClass}
                     currentIdClass={idClass}
+                    subjectList={subjectsData}
+                    subjectHandler={setIdSubject}
                 />
             </div>
 
@@ -52,7 +62,8 @@ export default function Students() {
                                 <td>{st.name}</td>
                                 <td>{st.dobStr}</td>
                                 <td>
-                                    <button type="button" className="btn btn-primary btn-sm">Add Grade</button>
+                                    <button type="button" className="btn btn-primary btn-sm" onClick={openGradeWindow}>Add Grade</button>
+                                    <AddGrade idStudent={st.id} idSubject={idSubject} isVisible={isGradeWindowVisible} visibilityHandler={setGradeWindowVisible} />
                                 </td>
                             </tr>
                         )

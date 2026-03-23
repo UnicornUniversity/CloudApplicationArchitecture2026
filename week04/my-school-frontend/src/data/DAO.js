@@ -16,13 +16,14 @@ class DAO {
 
     // data is JSON
     saveRoutines(url, data) {
-        const fullUrl = this.baseUrl + url;
-        return fetch(fullUrl,
+        const urlFull = this.baseUrl + url;
+        return fetch(urlFull,
             {
                 method: "POST",
-                header: "Content-Type: application/json",
+                headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(data)
-            });
+            }
+        );
     }
 
     async readClasses() {
@@ -40,6 +41,10 @@ class DAO {
     // contains one grade info
     saveGrade(gradeJson){
         return this.saveRoutines("/grades/add", gradeJson);
+    }
+
+    async readPerformance() {
+        return await this.fetchRoutines("/reports/performance");
     }
 }
 
