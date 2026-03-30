@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "ua-parser-js": "0.7.17"
+  }
+}
