@@ -1,7 +1,8 @@
-export default function SearchResults({searchParams}) {
+export default async function SearchResults({searchParams}) {
 
-    console.log("SearchResults = " + searchParams);
-    const dogSize = parseInt(searchParams["dogSize"]);
+    // In Next.js 15+, searchParams became a Promise that needs to be awaited.
+    const params = await searchParams;
+    const dogSize = parseInt(params["dogSize"] ?? "0");
     console.log("dogSize SearchResults = " + dogSize);
 
     return (

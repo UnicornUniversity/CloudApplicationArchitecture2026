@@ -1,12 +1,27 @@
 [
   {
+    "dogName": "Marusia",
+    "dogSize": "1",
+    "dogUrl": "images\\dog5.jpg"
+  },
+  {
+    "dogName": "Killer",
+    "dogSize": "2",
+    "dogUrl": "images\\dog2.jpg"
+  },
+  {
     "dogName": "Max",
-    "dogSize": 1,
-    "dogUrl": "images\\dog1.jpg"
+    "dogSize": "0",
+    "dogUrl": "images\\dog3.jpg"
   },
   {
     "dogName": "Gloria",
-    "dogSize": 0,
-    "dogUrl": "images\\dog2.jpg"
+    "dogSize": "1",
+    "dogUrl": "images\\dog1.jpg"
+  },
+  {
+    "dogName": "Buchticka",
+    "dogSize": "1",
+    "dogUrl": "images\\dog4.jpg"
   }
 ]

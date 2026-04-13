@@ -1,18 +1,29 @@
-const express = require("express");
 const dml = require("../data/dataManagementLayer");
-
+const {DOG_SIZES, DOG_SIZE_LABELS} = require("../constants/dogSizes");
 
 module.exports.getForm = (req, res, next) => {
     res.render("search/form");
 };
 
 module.exports.doSearch = async (req, res, next) => {
-    const dogSize = parseInt(req.body.dogSize);
-    console.log("dogSize=" + dogSize);
+    try {
+        const desiredDogSize = req.body.dogSize;
 
-    const allUsers = await dml.readUsers();
-    console.log(allUsers);
-    const results = allUsers.filter((dog) => parseInt(dog.dogSize) === dogSize);
+        // Validate dog size using constants
+        const validSizes = Object.values(DOG_SIZES);
+        if (!validSizes.includes(desiredDogSize)) {
+            throw new Error(`Invalid dog size. Must be one of: ${validSizes.join(', ')}`);
+        }
 
-    res.render("search/results", {"results": results});
+        const allProfiles = await dml.readProfiles();
+        const results = allProfiles.filter((item) => item.dogSize === desiredDogSize);
+
+        console.log(`Searching for ${DOG_SIZE_LABELS[desiredDogSize]} dogs - found ${results.length} results`);
+
+        res.render("search/results", {results: results});
+    } catch (error) {
+        console.error("Error searching profiles:", error.message);
+        next(error);
+    }
 };
+

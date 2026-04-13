@@ -1,10 +1,9 @@
 const express = require("express");
-const dml = require("../data/dataManagementLayer");
-const searchController = require("../controllers/searchController");
-
 const router = express.Router();
 
-router.get("/get", searchController.getForm);
+const searchController = require("../controllers/searchController");
+
+router.get("/form", searchController.getForm);
 router.post("/do", searchController.doSearch);
 
 module.exports = router;
