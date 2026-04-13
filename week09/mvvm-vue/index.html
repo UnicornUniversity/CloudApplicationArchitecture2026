@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue MVVM Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #42b983;
+            border-bottom: 2px solid #42b983;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #35495e;
+            margin-top: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-right: 10px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #42b983;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #35a372;
+        }
+        .todo-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .todo-item.completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+        .delete-btn {
+            background-color: #e74c3c;
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+        .mvvm-info {
+            background: #e7f7ef;
+            padding: 15px;
+            border-left: 4px solid #42b983;
+            margin-bottom: 20px;
+        }
+        .mvvm-info strong {
+            color: #35495e;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>Vue.js MVVM Pattern Demo</h1>
+
+            <div class="mvvm-info">
+                <strong>MVVM Pattern:</strong>
+                <ul>
+                    <li><strong>Model:</strong> Data objects (todos, counter, user)</li>
+                    <li><strong>View:</strong> HTML template with directives (v-model, v-for, v-bind)</li>
+                    <li><strong>ViewModel:</strong> Vue instance with reactive data binding</li>
+                </ul>
+            </div>
+
+            <!-- Counter Example -->
+            <div class="section">
+                <h2>1. Two-Way Data Binding (Counter)</h2>
+                <p>Count: <strong>{{ counter }}</strong></p>
+                <button @click="increment">Increment</button>
+                <button @click="decrement">Decrement</button>
+                <button @click="reset">Reset</button>
+                <p><em>Model ↔ ViewModel ↔ View</em></p>
+            </div>
+
+            <!-- Form Binding Example -->
+            <div class="section">
+                <h2>2. Form Input Binding (v-model)</h2>
+                <input type="text" v-model="userName" placeholder="Enter your name">
+                <p v-if="userName">Hello, <strong>{{ userName }}</strong>!</p>
+                <p v-else><em>Please enter your name</em></p>
+            </div>
+
+            <!-- Computed Property Example -->
+            <div class="section">
+                <h2>3. Computed Properties</h2>
+                <input type="number" v-model.number="price" placeholder="Price">
+                <input type="number" v-model.number="quantity" placeholder="Quantity">
+                <p>Total: <strong>${{ totalPrice }}</strong></p>
+                <p><em>Computed property automatically updates when dependencies change</em></p>
+            </div>
+
+            <!-- Todo List Example -->
+            <div class="section">
+                <h2>4. Todo List (List Rendering & Events)</h2>
+                <div>
+                    <input type="text" v-model="newTodo" @keyup.enter="addTodo" placeholder="Enter new todo">
+                    <button @click="addTodo">Add Todo</button>
+                </div>
+                <div v-if="todos.length === 0" style="margin-top: 20px; color: #999;">
+                    <em>No todos yet. Add one above!</em>
+                </div>
+                <div v-else style="margin-top: 20px;">
+                    <div v-for="(todo, index) in todos" :key="todo.id" class="todo-item" :class="{ completed: todo.completed }">
+                        <div>
+                            <input type="checkbox" v-model="todo.completed" :id="'todo-' + todo.id">
+                            <label :for="'todo-' + todo.id">{{ todo.text }}</label>
+                        </div>
+                        <button class="delete-btn" @click="removeTodo(index)">Delete</button>
+                    </div>
+                    <p style="margin-top: 15px;">
+                        <strong>{{ remainingTodos }}</strong> of {{ todos.length }} remaining
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

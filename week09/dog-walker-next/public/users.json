@@ -1,0 +1,12 @@
+[
+  {
+    "dogName": "Max",
+    "dogSize": 1,
+    "dogUrl": "images\\dog1.jpg"
+  },
+  {
+    "dogName": "Gloria",
+    "dogSize": 0,
+    "dogUrl": "images\\dog2.jpg"
+  }
+]

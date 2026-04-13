@@ -1,0 +1,25 @@
+<head>
+    <title>Search</title>
+    <%- include("../shared/css.ejs") %>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h3>Search parameters:</h3>
+            <div class="form-group">
+                <form method="post" action="/search/do">
+                    <label for="dogSize">Dog Size</label>
+                    <select name="dogSize" type="text" class="form-control">
+                        <option value="0">< 5 kg</option>
+                        <option value="1">6-14 kg</option>
+                        <option value="2">< 14 kg</option>
+                    </select>
+                    <button>Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
