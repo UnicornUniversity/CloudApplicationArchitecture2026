@@ -1,11 +1,8 @@
 const dml = require("../data/dataManagementLayer");
 const { DOG_SIZES, DOG_SIZE_LABELS } = require("../constants/dogSizes");
 
-module.exports.getForm = (req, res, next) => {
-    res.render("profile/form",
-        {
-            userName: req.session.userName
-        });
+module.exports.getForm = (req, res) => {
+    res.render("profile/form");
 };
 
 module.exports.saveProfile = async (req, res, next) => {
@@ -33,10 +30,7 @@ module.exports.saveProfile = async (req, res, next) => {
 
         await dml.saveProfiles([newProfile, ...existedProfiles]);
 
-        res.render("search/form",
-            {
-                userName: req.session.userName
-            });
+        res.render("search/form");
     } catch (error) {
         console.error("Error saving profile:", error.message);
         next(error);
