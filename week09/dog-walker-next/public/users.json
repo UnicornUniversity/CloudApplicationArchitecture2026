@@ -2,11 +2,16 @@
   {
     "dogName": "Max",
     "dogSize": 1,
-    "dogUrl": "images\\dog1.jpg"
+    "dogUrl": "dog1.jpg"
   },
   {
     "dogName": "Gloria",
     "dogSize": 0,
-    "dogUrl": "images\\dog2.jpg"
+    "dogUrl": "dog2.jpg"
+  },
+  {
+    "dogName": "Brownie",
+    "dogSize": 0,
+    "dogUrl": "dog3.jpg"
   }
 ]
