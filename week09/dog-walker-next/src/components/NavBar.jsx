@@ -17,7 +17,7 @@ export default function NavBar() {
                         <Link href="/search" className="nav-link">Search</Link>
                     </li>
                     <li className="nav-item">
-                        <Link href="/search" className="nav-link">Profile</Link>
+                        <Link href="/profile" className="nav-link">Profile</Link>
                     </li>
                 </ul>
             </div>

@@ -26,4 +26,14 @@ function getImageUrl(url){
     return imagesPath + "/" + url;
 }
 
-export {readUsers, getImageUrl};
+async function saveUsers(items) {
+    return await saveDataRoutines(USERS, items);
+}
+
+async function saveImage(file) {
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    await fs.writeFile(path.join(dataPath, imagesPath, file.name), buffer);
+}
+
+export {readUsers, getImageUrl, saveUsers, saveImage};
