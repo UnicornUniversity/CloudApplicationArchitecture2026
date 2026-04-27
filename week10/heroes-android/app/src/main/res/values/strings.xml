@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Heroes Math Game</string>
+    <string name="round_format">Round %1$d / %2$d</string>
+    <string name="loading">Loading exercise…</string>
+    <string name="victory_title">Victory!</string>
+    <string name="game_over_title">Game Over</string>
+    <string name="victory_message">You defeated all the monsters!</string>
+    <string name="game_over_message">Too many wrong answers. Try again!</string>
+    <string name="play_again">Play Again</string>
+    <string name="error_title">Error</string>
+    <string name="error_network">Failed to load exercises. Check your network connection.</string>
+    <string name="retry">Retry</string>
+    <string name="hero_description">Hero character</string>
+    <string name="monster_description">Monster character</string>
+</resources>
