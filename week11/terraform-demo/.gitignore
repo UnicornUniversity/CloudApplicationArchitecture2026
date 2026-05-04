@@ -1,0 +1,15 @@
+# Terraform state and local files
+terraform.tfstate
+terraform.tfstate.backup
+*.tfstate
+.terraform/
+
+# Local AWS credentials (do not commit)
+.aws/credentials
+credentials
+
+# Editor and OS files
+.vscode/
+*.swp
+.DS_Store
+
